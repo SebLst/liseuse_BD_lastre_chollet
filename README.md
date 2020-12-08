@@ -1,1 +1,6 @@
-# liseuse_BD_lastre_chollet
+# Projet liseuse de BD 
+
+## Membres du projet
+
+CHOLLET Tom
+LASTRE Sébastien
