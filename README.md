@@ -11,4 +11,5 @@ LASTRE Sébastien
 mkdir build
 cd build
 cmake ..
+./cbreader
 ```
