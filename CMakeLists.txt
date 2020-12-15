@@ -16,10 +16,12 @@ file(GLOB_RECURSE FILES
   )
 
 include_directories(include)
+
 add_executable(cbreader ${FILES})
-target_link_libraries(cbreader sfml-window)
+
+target_link_libraries(cbreader sfml-window sfml-graphics)
+
 target_include_directories(cbreader
   SYSTEM PUBLIC
-#   external/SFML/include
-  external/SFML
+  external/SFML/include
 )
