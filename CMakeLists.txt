@@ -1,7 +1,6 @@
 cmake_minimum_required (VERSION 3.0)
 project(CBReader)
 
-
 ##############
 ## EXTERNAL ##
 ##############
@@ -21,5 +20,6 @@ add_executable(cbreader ${FILES})
 target_link_libraries(cbreader sfml-window)
 target_include_directories(cbreader
   SYSTEM PUBLIC
-  external/SFML/include/
+#   external/SFML/include
+  external/SFML
 )

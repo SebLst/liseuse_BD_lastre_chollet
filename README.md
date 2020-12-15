@@ -4,3 +4,11 @@
 
 CHOLLET Tom
 LASTRE Sébastien
+
+## Build
+
+```
+mkdir build
+cd build
+cmake ..
+```
