@@ -16,7 +16,7 @@ sudo apt-get install build-essential libgtk-3-dev
 
 ## Build
 
-After cloning the repo, don't forget to ```git submodules update``` to get the external dependencies.
+After cloning the repo, don't forget to ```git submodule update``` to get the external dependencies.
 
 ```
 mkdir build
