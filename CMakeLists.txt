@@ -1,6 +1,8 @@
 cmake_minimum_required (VERSION 3.0)
 project(CBReader)
 
+set( MAKE_CXX_FLAGS "wx-config --cxxflags --libs -Wall" )
+
 ##############
 ## EXTERNAL ##
 ##############
@@ -19,9 +21,9 @@ include_directories(include)
 
 add_executable(cbreader ${FILES})
 
-target_link_libraries(cbreader sfml-window sfml-graphics)
+target_link_libraries(cbreader)
 
 target_include_directories(cbreader
   SYSTEM PUBLIC
-  external/SFML/include
+  external/wxWidgets/include
 )
