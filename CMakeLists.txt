@@ -21,7 +21,7 @@ include_directories(include)
 
 add_executable(cbreader ${FILES})
 
-target_link_libraries(cbreader)
+target_link_libraries(cbreader wx::core wx::base)
 
 target_include_directories(cbreader
   SYSTEM PUBLIC
