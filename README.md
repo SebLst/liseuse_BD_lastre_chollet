@@ -22,5 +22,6 @@ After cloning the repo, don't forget to ```git submodule update``` to get the ex
 mkdir build
 cd build
 cmake ..
+make
 ./cbreader
 ```
