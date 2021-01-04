@@ -2,13 +2,12 @@
 #define DISPLAYPANEL_HPP
 
 #include <wx/wx.h>
+#include <wx/panel.h>
 
-class DisplayPanel : public wxFrame
+class DisplayPanel : public wxPanel
 {
 public:
-    DisplayPanel(wxWindow *parent, const wxString &title);
-
-    wxTextCtrl *textctrl;
+    DisplayPanel(wxWindow *parent);
 };
 
 #endif

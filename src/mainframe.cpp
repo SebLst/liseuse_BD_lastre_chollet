@@ -1,11 +1,11 @@
-#include "menu.hpp"
+#include "mainframe.hpp"
 
-/*
- * The actual menu of the app
- */
-Menu::Menu(const wxString &title)
-    : wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(500, 300))
+MainFrame::MainFrame(const wxString &title)
+    : wxFrame(NULL, -1, title, wxDefaultPosition, wxSize(800, 600))
 {
+    ///////////////////////////////////////////////////////////////////
+
+    // Setting the menu
     menuBar = new wxMenuBar;
     /*
      * Here is the layout of the menu:
@@ -32,22 +32,31 @@ Menu::Menu(const wxString &title)
     // Append to Menu Bar
     menuBar->Append(menuFile, "&File");
     menuBar->Append(menuHelp, "&Help");
-    SetMenuBar(menuBar);
-
-    CreateStatusBar(); // creates a status bar that will display some text when the user hovers the mouse over a menu
-    SetStatusText("Welcome to CBReader!");
 
     // Binding events and methods called
-    Bind(wxEVT_MENU, &Menu::OnExit, this, wxID_EXIT);
-    Bind(wxEVT_MENU, &Menu::OnHelp, this, wxID_HELP);
-    Bind(wxEVT_MENU, &Menu::OnOpen, this, wxID_OPEN);
-    Centre();
+    Bind(wxEVT_MENU, &MainFrame::OnExit, this, wxID_EXIT);
+    Bind(wxEVT_MENU, &MainFrame::OnHelp, this, wxID_HELP);
+    Bind(wxEVT_MENU, &MainFrame::OnOpen, this, wxID_OPEN);
+
+    SetMenuBar(menuBar);
+
+    ///////////////////////////////////////////////////////////////////
+
+    display = new DisplayPanel(this);
+
+    CreateStatusBar();
+    SetStatusText("Welcome to CBReader!");
+
+    ///////////////////////////////////////////////////////////////////
+
+    SetMinSize(wxSize(500, 500)); // sets a minimum size to the window
+    Centre();                     // puts the window in the center of the screen
 }
 
 /*
  * Closes the app
  */
-void Menu::OnExit(wxCommandEvent &WXUNUSED(event))
+void MainFrame::OnExit(wxCommandEvent &WXUNUSED(event))
 {
     Close(true);
 }
@@ -55,7 +64,7 @@ void Menu::OnExit(wxCommandEvent &WXUNUSED(event))
 /*
  * Displays some help
 */
-void Menu::OnHelp(wxCommandEvent &WXUNUSED(event))
+void MainFrame::OnHelp(wxCommandEvent &WXUNUSED(event))
 {
     wxMessageBox("This is a great app",
                  "About CBReader", wxOK | wxICON_INFORMATION);
@@ -64,7 +73,7 @@ void Menu::OnHelp(wxCommandEvent &WXUNUSED(event))
 /*
  * Open a file selector 
 */
-void Menu::OnOpen(wxCommandEvent &WXUNUSED(event))
+void MainFrame::OnOpen(wxCommandEvent &WXUNUSED(event))
 {
     wxFileDialog openFileDialog(this, _("Open Image file"), "", "",
                                 "All image files (*.jpeg;*.png;*.bmp)|*.jpeg;*.png;*.bmp",
