@@ -26,6 +26,7 @@ git submodule update
 mkdir build
 cd build
 cmake ..
-make
+make -j 4
 ./cbreader
 ```
+The ```-j 4``` flag is no necessary but we strongly recommend you to use it as it might take you a minute or two otherwise.
