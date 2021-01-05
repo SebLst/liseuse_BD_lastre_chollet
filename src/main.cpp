@@ -1,5 +1,3 @@
-// #include "helloworld.hpp"
-
 #include "main.hpp"
 
 IMPLEMENT_APP(CBReaderApp);
