@@ -8,6 +8,10 @@ class DisplayPanel : public wxPanel
 {
 public:
     DisplayPanel(wxWindow *parent);
+
+    bool loadImage(wxString path, wxBitmapType format);
+
+    wxStaticBitmap *image;
 };
 
 #endif

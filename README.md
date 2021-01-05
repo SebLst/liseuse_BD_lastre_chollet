@@ -20,6 +20,9 @@ After cloning the repo, don't forget to run the following to get the external de
 ```
 git submodule init
 git submodule update
+cd external/wxWidgets
+git submodule init
+git submodule update
 ``` 
 
 ```
@@ -29,4 +32,4 @@ cmake ..
 make -j 4
 ./cbreader
 ```
-The ```-j 4``` flag is no necessary but we strongly recommend you to use it as it might take you a minute or two otherwise.
+The ```-j 4``` flag is not necessary but we strongly recommend you to use it as it might take you a minute or two otherwise.

@@ -5,9 +5,13 @@ IMPLEMENT_APP(CBReaderApp);
 
 bool CBReaderApp::OnInit()
 {
-	extract_zip("../res", "test_doc.cbz");
+
+    wxInitAllImageHandlers();
+
     MainFrame *mainFrame = new MainFrame("CBReader");
-    mainFrame->Show();
+    mainFrame->Show(true);
+  
+    extract_zip("../res", "test_doc.cbz");
 
     return true;
 }
