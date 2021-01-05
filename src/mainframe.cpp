@@ -13,6 +13,9 @@ MainFrame::MainFrame(const wxString &title)
      *  - Open... CTRL+O / TODO
      *  - Export as CTRL+E / TODO
      *  - Quit
+     * Bookmarks / TODO (pas tout de suite)
+     *  - Open Bookmarks
+     *  - Set Bookmark
      * Help
      *  - About
      */
@@ -54,7 +57,7 @@ MainFrame::MainFrame(const wxString &title)
 }
 
 /*
- * Closes the app
+ * Close the app
  */
 void MainFrame::OnExit(wxCommandEvent &WXUNUSED(event))
 {
@@ -62,7 +65,7 @@ void MainFrame::OnExit(wxCommandEvent &WXUNUSED(event))
 }
 
 /*
- * Displays some help
+ * Display some help
 */
 void MainFrame::OnHelp(wxCommandEvent &WXUNUSED(event))
 {

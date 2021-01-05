@@ -4,6 +4,7 @@
 #include <wx/wx.h>
 
 #include "mainframe.hpp"
+
 class CBReaderApp : public wxApp
 {
 public:
