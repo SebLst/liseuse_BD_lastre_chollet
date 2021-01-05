@@ -1,0 +1,4 @@
+SPATH=$1
+DPATH=$2
+FILE=$3
+unzip ${SPATH}/${FILE} -d ${DPATH}
