@@ -44,8 +44,12 @@ MainFrame::MainFrame(const wxString &title)
     SetMenuBar(menuBar);
 
     ///////////////////////////////////////////////////////////////////
+    // Main frame
 
     display = new DisplayPanel(this);
+
+    ///////////////////////////////////////////////////////////////////
+    // Status bar
 
     CreateStatusBar();
     SetStatusText("Welcome to CBReader!");
@@ -66,7 +70,7 @@ void MainFrame::OnExit(wxCommandEvent &WXUNUSED(event))
 
 /*
  * Display some help
-*/
+ */
 void MainFrame::OnHelp(wxCommandEvent &WXUNUSED(event))
 {
     wxMessageBox("This is a great app",
@@ -75,21 +79,24 @@ void MainFrame::OnHelp(wxCommandEvent &WXUNUSED(event))
 
 /*
  * Open a file selector 
-*/
+ */
 void MainFrame::OnOpen(wxCommandEvent &WXUNUSED(event))
 {
     wxFileDialog openFileDialog(this, _("Open Image file"), "", "",
-                                "All image files (*.jpeg;*.png;*.bmp)|*.jpeg;*.png;*.bmp",
+                                "All image files (*.jpeg;*.png;*.bmp;*.jpg)|*.jpeg;*.png;*.bmp;*.jpg",
                                 wxFD_OPEN | wxFD_FILE_MUST_EXIST);
 
     if (openFileDialog.ShowModal() == wxID_CANCEL)
         return; // the user changed idea...
 
     // proceed loading the file chosen by the user
-    wxFileInputStream input_stream(openFileDialog.GetPath());
+    wxString path = openFileDialog.GetPath();
+    wxFileInputStream input_stream(path);
     if (!input_stream.IsOk())
     {
         wxLogError("Cannot open file '%s'.", openFileDialog.GetPath());
         return;
     }
+
+    display->loadImage(path, wxBITMAP_TYPE_ANY);
 }

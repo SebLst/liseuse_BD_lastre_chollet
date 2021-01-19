@@ -13,15 +13,16 @@ class MainFrame : public wxFrame
 public:
     MainFrame(const wxString &title);
 
+    // button handlers
     void OnExit(wxCommandEvent &event);
     void OnHelp(wxCommandEvent &event);
     void OnOpen(wxCommandEvent &event);
 
-    wxMenuBar *menuBar;
-    wxMenu *menuFile;
-    wxMenu *menuHelp;
+    wxMenuBar *menuBar; // menu bar
+    wxMenu *menuFile;   // "File" button
+    wxMenu *menuHelp;   // "Help" button
 
-    DisplayPanel *display;
+    DisplayPanel *display; // main frame
 };
 
 #endif
