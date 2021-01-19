@@ -5,7 +5,7 @@ IMPLEMENT_APP(CBReaderApp);
 
 bool CBReaderApp::OnInit()
 {
-	extract_zip("../res", "test_doc.cbz");
+	extract_zip("../res", "test.zip");
     MainFrame *mainFrame = new MainFrame("CBReader");
     mainFrame->Show();
 
