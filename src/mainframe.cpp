@@ -44,8 +44,12 @@ MainFrame::MainFrame(const wxString &title)
     SetMenuBar(menuBar);
 
     ///////////////////////////////////////////////////////////////////
+    // Main frame
 
     display = new DisplayPanel(this);
+
+    ///////////////////////////////////////////////////////////////////
+    // Status bar
 
     CreateStatusBar();
     SetStatusText("Welcome to CBReader!");
@@ -66,7 +70,7 @@ void MainFrame::OnExit(wxCommandEvent &WXUNUSED(event))
 
 /*
  * Display some help
-*/
+ */
 void MainFrame::OnHelp(wxCommandEvent &WXUNUSED(event))
 {
     wxMessageBox("This is a great app",
@@ -75,7 +79,7 @@ void MainFrame::OnHelp(wxCommandEvent &WXUNUSED(event))
 
 /*
  * Open a file selector 
-*/
+ */
 void MainFrame::OnOpen(wxCommandEvent &WXUNUSED(event))
 {
     wxFileDialog openFileDialog(this, _("Open Image file"), "", "",

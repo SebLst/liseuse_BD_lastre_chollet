@@ -1,6 +1,5 @@
 #include "main.hpp"
 
-
 IMPLEMENT_APP(CBReaderApp);
 
 bool CBReaderApp::OnInit()
@@ -10,8 +9,8 @@ bool CBReaderApp::OnInit()
 
     MainFrame *mainFrame = new MainFrame("CBReader");
     mainFrame->Show(true);
-  
-    extract_zip("../res", "test_doc.cbz");
+
+    // extract_zip("../res", "test_doc.cbz");
 
     return true;
 }
