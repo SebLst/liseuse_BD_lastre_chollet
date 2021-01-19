@@ -15,7 +15,7 @@ bool DisplayPanel::loadImage(wxString path, wxBitmapType format)
 
     if (image) // if an image is already being displayed
     {
-        image->Destroy(); // destroy it
+        image->Destroy(); // it is destroyed
     }
 
     if (file.LoadFile(path, format))
