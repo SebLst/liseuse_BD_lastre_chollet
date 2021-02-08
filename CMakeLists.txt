@@ -26,4 +26,5 @@ target_link_libraries(cbreader wx::core wx::base)
 target_include_directories(cbreader
   SYSTEM PUBLIC
   external/wxWidgets/include
+  external/libarchive/include
 )
