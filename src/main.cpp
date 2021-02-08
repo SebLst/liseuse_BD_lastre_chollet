@@ -1,3 +1,4 @@
+/*
 #include "main.hpp"
 
 IMPLEMENT_APP(CBReaderApp);
@@ -16,3 +17,4 @@ bool CBReaderApp::OnInit()
 
     return true;
 }
+*/

@@ -1,3 +1,4 @@
+/*
 #ifndef MAINFRAME_HPP
 #define MAINFRAME_HPP
 
@@ -26,3 +27,4 @@ public:
 };
 
 #endif
+*/

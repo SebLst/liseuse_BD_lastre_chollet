@@ -1,3 +1,4 @@
+/*
 #ifndef DISPLAYPANEL_HPP
 #define DISPLAYPANEL_HPP
 
@@ -15,3 +16,4 @@ public:
 };
 
 #endif
+*/

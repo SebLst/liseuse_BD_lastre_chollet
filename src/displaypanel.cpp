@@ -1,3 +1,4 @@
+/*
 #include "displaypanel.hpp"
 
 // Stolen shamelessly on zetcode.com/gui/wxwidgets/layoutmanagement for testing purposes
@@ -27,3 +28,4 @@ bool DisplayPanel::loadImage(wxString path, wxBitmapType format)
     std::cout << "something went wrong" << std::endl;
     return false;
 }
+*/
