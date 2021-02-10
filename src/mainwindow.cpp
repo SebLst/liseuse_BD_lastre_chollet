@@ -5,6 +5,8 @@
 #include <wx/filedlg.h>
 #include <wx/wfstream.h>
 
+#include "./../icons/cbreader_icon.xpm"
+
 BEGIN_EVENT_TABLE(MainWindow, wxFrame)
 EVT_MENU(wxID_OPEN, MainWindow::OnOpen)
 EVT_MENU(wxID_HELP, MainWindow::OnHelp)
@@ -45,11 +47,13 @@ MainWindow::MainWindow(wxWindow *parent,
 
     SetSizer(sizer);
 
-    // dynamic binding
+    // dynamic binding of events
     Bind(wxEVT_CLOSE_WINDOW, &OnClose);
 
     // other
     SetMinSize(wxSize(300, 300));
+    wxIcon *appIcon = new wxIcon(cbreader_icon); // image from https://www.freepik.com
+    SetIcon(*appIcon);
 }
 
 void MainWindow::OnOpen(wxCommandEvent &WXUNUSED(event))

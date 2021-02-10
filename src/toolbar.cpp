@@ -1,8 +1,8 @@
 #include "toolbar.h"
 #include <wx/artprov.h>
 
-#include <icons/zoom-in.xpm>
-#include <icons/zoom-out.xpm>
+#include <./../icons/zoom-in.xpm>
+#include <./../icons/zoom-out.xpm>
 
 void makeToolBar(wxToolBar *toolBar)
 {

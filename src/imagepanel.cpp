@@ -32,7 +32,6 @@ void ImagePanel::render(wxDC &dc)
     int imageWidth = image.GetWidth();
     wxSize imagePanelSize = GetSize();
     int imagePanelWidth = imagePanelSize.GetWidth();
-    std::cout << imageWidth << " " << imagePanelWidth << " " << scale << std::endl;
     drawXPos = std::max(static_cast<int>((imagePanelWidth - imageWidth * scale) / 2), 0); // TODO fix the zoom
     dc.SetUserScale(scale, scale);
     dc.DrawBitmap(image, drawXPos, drawYPos, false);
