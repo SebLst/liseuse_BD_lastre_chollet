@@ -1,6 +1,6 @@
-# Projet liseuse de BD 
+# Comic Book Reader
 
-## Membres du projet
+## Project members
 
 CHOLLET Tom
 LASTRE Sébastien
@@ -29,7 +29,7 @@ git submodule update
 mkdir build
 cd build
 cmake ..
-make -j 4
+make -j 8
 ./cbreader
 ```
-The ```-j 4``` flag is not necessary but we strongly recommend you to use it as it might take you a minute or two otherwise.
+The ```-j 8``` flag is not necessary but we strongly recommend you to use it as it might take you a minute or two otherwise.

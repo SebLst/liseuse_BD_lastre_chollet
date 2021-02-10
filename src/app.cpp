@@ -19,6 +19,8 @@ bool App::OnInit()
         return false;
     }
 
+    wxInitAllImageHandlers();
+
     MainWindow *main = new MainWindow(NULL, window::id::MAINWINDOW, _("Comic Book Reader"), wxDefaultPosition, wxSize(800, 600));
     main->Show();
 

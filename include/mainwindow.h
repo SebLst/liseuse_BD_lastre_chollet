@@ -1,11 +1,13 @@
-#ifndef MAIN_WINDOW
-#define MAIN_WINDOW
+#ifndef MAIN_WINDOW_H
+#define MAIN_WINDOW_H
 
 #include <wx/wxprec.h>
 
 #ifndef WX_PRECOMP
 #include <wx/wx.h>
 #endif
+
+#include "imagepanel.h"
 
 class MainWindow : public wxFrame
 {
@@ -21,9 +23,13 @@ public:
 
     void OnOpen(wxCommandEvent &event);
     void OnHelp(wxCommandEvent &event);
-    void OnZip(wxCommandEvent &event);
-    void OnRar(wxCommandEvent &event);
+    void OnZip(wxCommandEvent &event); // TODO
+    void OnRar(wxCommandEvent &event); // TODO
     void OnQuit(wxCommandEvent &event);
+    void OnZoomIn(wxCommandEvent &event);
+    void OnZoomOut(wxCommandEvent &event);
+
+    ImagePanel *imagePanel;
 
     DECLARE_EVENT_TABLE();
 };
