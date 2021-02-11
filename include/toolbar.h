@@ -7,6 +7,8 @@
 #include <wx/wx.h>
 #endif
 
+#include "id.h"
+
 void makeToolBar(wxToolBar *toolBar);
 
 #endif
