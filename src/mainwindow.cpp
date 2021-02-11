@@ -86,6 +86,7 @@ void MainWindow::OnOpenFile(wxCommandEvent &WXUNUSED(event))
         return;
     }
 
+    imagePanel->resetScale();
     imagePanel->loadImage(filePath, wxBITMAP_TYPE_ANY);
     Refresh();
 }
@@ -124,6 +125,7 @@ void MainWindow::OnOpenDir(wxCommandEvent &WXUNUSED(event))
     pageCurrent = 0;
     pageTotal = files.size();
 
+    imagePanel->resetScale();
     imagePanel->loadImage(files[0], wxBITMAP_TYPE_ANY);
     Refresh();
 }

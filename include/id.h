@@ -6,6 +6,7 @@ namespace window
     enum id
     {
         MAINWINDOW = wxID_HIGHEST + 1, // les valeurs entre wxID_LOWEST et wxID_HIGHEST sont réservées à wxWidgets
+        IMAGE_PANEL,
         PREVIOUS_PAGE,
         NEXT_PAGE,
         FIRST_PAGE,
