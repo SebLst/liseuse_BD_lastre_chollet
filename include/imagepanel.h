@@ -11,11 +11,11 @@ class ImagePanel : public wxPanel
 {
 private:
     wxBitmap baseImage;
-    wxBitmap displayImage; // this one will be scaled for zooming
-    bool imageExists = false;
-    int drawXPos = 0;
-    int drawYPos = 0;
-    double scale = 1;
+    wxBitmap displayImage;    // this one will be scaled for zooming
+    bool imageExists = false; // prevents operations on an image if it is not yet loaded
+    int drawXPos = 0;         // x position of the image anchor
+    int drawYPos = 0;         // y position of the image anchor
+    double scale = 1;         // scale of the image
 
 public:
     ImagePanel(wxFrame *parent);
@@ -34,6 +34,8 @@ public:
     void resetYPos() { drawYPos = 0; }
     void centerImage();
     void rescale();
+    void makeImageFitPanel();
+    void checkPosition();
 
     DECLARE_EVENT_TABLE()
 };

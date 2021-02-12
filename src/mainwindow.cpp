@@ -3,6 +3,7 @@
 #include "menu.h"
 #include "id.h"
 #include "shortcuts.h"
+#include "param.h"
 #include <wx/filedlg.h>
 #include <wx/wfstream.h>
 #include <wx/accel.h>
@@ -63,7 +64,7 @@ MainWindow::MainWindow(wxWindow *parent,
     Bind(wxEVT_CLOSE_WINDOW, &OnClose);
 
     // other
-    SetMinSize(wxSize(300, 300));
+    SetMinSize(wxSize(param::WINDOW_MIN_SIZE_X, param::WINDOW_MIN_SIZE_Y));
     wxIcon *appIcon = new wxIcon(cbreader_icon); // image from https://www.freepik.com
     SetIcon(*appIcon);
 }
@@ -88,6 +89,7 @@ void MainWindow::OnOpenFile(wxCommandEvent &WXUNUSED(event))
 
     imagePanel->resetScale();
     imagePanel->loadImage(filePath, wxBITMAP_TYPE_ANY);
+    imagePanel->makeImageFitPanel();
     Refresh();
 }
 
@@ -127,6 +129,7 @@ void MainWindow::OnOpenDir(wxCommandEvent &WXUNUSED(event))
 
     imagePanel->resetScale();
     imagePanel->loadImage(files[0], wxBITMAP_TYPE_ANY);
+    imagePanel->makeImageFitPanel();
     Refresh();
 }
 
