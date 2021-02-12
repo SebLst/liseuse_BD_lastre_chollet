@@ -27,6 +27,16 @@ END_EVENT_TABLE()
 
 void OnClose(wxCloseEvent &event);
 
+/**
+ * Constructor of the MainWindow class
+ * @param parent Pointer to the parent
+ * @param id Window ID
+ * @param title Text displayed on the window's title bar
+ * @param pos The window position
+ * @param size The window size
+ * @param style The window style (see wxFrame class for more description)
+ * @param name The name of the window, used to associate the name with the item
+*/
 MainWindow::MainWindow(wxWindow *parent,
                        wxWindowID id,
                        const wxString &title,
@@ -69,6 +79,9 @@ MainWindow::MainWindow(wxWindow *parent,
     SetIcon(*appIcon);
 }
 
+/**
+ * Opens a file dialog to open an image
+*/
 void MainWindow::OnOpenFile(wxCommandEvent &WXUNUSED(event))
 {
     wxFileDialog openFileDialog(this, _("Open Image file"), "", "",
@@ -93,6 +106,9 @@ void MainWindow::OnOpenFile(wxCommandEvent &WXUNUSED(event))
     Refresh();
 }
 
+/**
+ * Opens a directory dialog to open a directory containing image files
+*/
 void MainWindow::OnOpenDir(wxCommandEvent &WXUNUSED(event))
 {
     wxDirDialog openDirDialog(this, _("Choose directory"), cwd,
@@ -133,18 +149,27 @@ void MainWindow::OnOpenDir(wxCommandEvent &WXUNUSED(event))
     Refresh();
 }
 
+/**
+ * Zooms in and refreshes the window
+*/
 void MainWindow::OnZoomIn(wxCommandEvent &WXUNUSED(event))
 {
     imagePanel->zoomIn();
     Refresh();
 }
 
+/**
+ * Zooms out and refreshes the window
+*/
 void MainWindow::OnZoomOut(wxCommandEvent &WXUNUSED(event))
 {
     imagePanel->zoomOut();
     Refresh();
 }
 
+/**
+ * Opens the previous page when the left arrow key is pressed
+*/
 void MainWindow::OnArrowLeft(wxCommandEvent &WXUNUSED(event))
 {
     if (files.size() == 0) // if there are no files
@@ -160,6 +185,9 @@ void MainWindow::OnArrowLeft(wxCommandEvent &WXUNUSED(event))
     }
 }
 
+/**
+ * Opens the next page when the right arrow key is pressed
+*/
 void MainWindow::OnArrowRight(wxCommandEvent &WXUNUSED(event))
 {
     if (files.size() == 0) // if there are no files
@@ -175,6 +203,9 @@ void MainWindow::OnArrowRight(wxCommandEvent &WXUNUSED(event))
     }
 }
 
+/**
+ * Opens the first page
+*/
 void MainWindow::OnFirstPage(wxCommandEvent &WXUNUSED(event))
 {
     if (files.size() == 0)
@@ -187,6 +218,9 @@ void MainWindow::OnFirstPage(wxCommandEvent &WXUNUSED(event))
     Refresh();
 }
 
+/**
+ * Opens the last page
+*/
 void MainWindow::OnLastPage(wxCommandEvent &WXUNUSED(event))
 {
     if (files.size() == 0)
@@ -199,20 +233,32 @@ void MainWindow::OnLastPage(wxCommandEvent &WXUNUSED(event))
     Refresh();
 }
 
+/**
+ * Opens the help message box
+*/
 void MainWindow::OnHelp(wxCommandEvent &WXUNUSED(event))
 {
     wxMessageBox("If you don't understand what a button does, you should have an indication of what it does in the bottom bar !");
 }
 
+/**
+ * Calls the Close fonction
+*/
 void MainWindow::OnQuit(wxCommandEvent &WXUNUSED(event))
 {
     Close();
 }
 
+/**
+ * Called when the app is doing nothing
+*/
 void MainWindow::OnIdle(wxIdleEvent &WXUNUSED(event))
 {
 }
 
+/**
+ * Opens the close event, which lets the user choose to close the app
+*/
 void OnClose(wxCloseEvent &event)
 {
     if (event.CanVeto())
