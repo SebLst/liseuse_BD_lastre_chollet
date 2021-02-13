@@ -10,7 +10,7 @@
 class ImagePanel : public wxPanel
 {
 private:
-    wxBitmap baseImage;
+    wxBitmap baseImage;       // the base image
     wxBitmap displayImage;    // this one will be scaled for zooming
     bool imageExists = false; // prevents operations on an image if it is not yet loaded
     int drawXPos = 0;         // x position of the image anchor

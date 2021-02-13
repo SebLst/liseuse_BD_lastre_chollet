@@ -12,7 +12,8 @@ namespace window
         FIRST_PAGE,
         LAST_PAGE,
         OPEN_FILE,
-        OPEN_DIRECTORY
+        OPEN_DIRECTORY,
+        HIDE_BOOKMARK_PANEL
     };
 }
 

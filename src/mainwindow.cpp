@@ -29,7 +29,7 @@ void OnClose(wxCloseEvent &event);
 
 /**
  * Constructor of the MainWindow class
- * @param parent Pointer to the parent
+ * @param parent Parent frame
  * @param id Window ID
  * @param title Text displayed on the window's title bar
  * @param pos The window position
@@ -59,8 +59,14 @@ MainWindow::MainWindow(wxWindow *parent,
     makeToolBar(toolBar);
     toolBar->Realize();
 
-    // main display
+    // main sizer
     wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
+
+    // bookmark panel
+    bookmarkPanel = new BookmarkPanel(this);
+    sizer->Add(bookmarkPanel, 1, wxEXPAND);
+
+    // main display
     imagePanel = new ImagePanel(this);
     sizer->Add(imagePanel, 1, wxEXPAND);
 

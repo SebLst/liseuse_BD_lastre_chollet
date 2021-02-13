@@ -9,6 +9,7 @@
 
 #include <wx/dir.h>
 #include "imagepanel.h"
+#include "bookmark.h"
 
 class MainWindow : public wxFrame
 {
@@ -72,12 +73,14 @@ public:
     void OnArrowRight(wxCommandEvent &event);
     void OnFirstPage(wxCommandEvent &event);
     void OnLastPage(wxCommandEvent &event);
+
     void OnIdle(wxIdleEvent &event);
 
-    ImagePanel *imagePanel;    // the image panel, in which the image is displayed
-    wxArrayString files;       // an array of wxString containing the list of paths to the files of the comic book
-    wxString cwd = wxGetCwd(); // current working directory path
-    wxDir *dir;                // current working directory
+    ImagePanel *imagePanel;       // the image panel, in which the image is displayed
+    BookmarkPanel *bookmarkPanel; // the bookmark panel
+    wxArrayString files;          // an array of wxString containing the list of paths to the files of the comic book
+    wxString cwd = wxGetCwd();    // current working directory path
+    wxDir *dir;                   // current working directory
 
     DECLARE_EVENT_TABLE();
 };

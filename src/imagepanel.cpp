@@ -8,12 +8,19 @@ EVT_PAINT(ImagePanel::paintEvent)
 EVT_MOUSEWHEEL(ImagePanel::OnMouseWheelEvent)
 END_EVENT_TABLE()
 
+/**
+ * Constructor of the ImagePanel class
+ * @param parent Parent frame
+*/
 ImagePanel::ImagePanel(wxFrame *parent)
     : wxPanel(parent)
 {
     SetBackgroundColour(wxColor(*wxBLACK));
 }
 
+/**
+ * PaintEvent handler
+*/
 void ImagePanel::paintEvent(wxPaintEvent &WXUNUSED(event))
 {
     if (imageExists)
@@ -29,12 +36,18 @@ void ImagePanel::paintNow()
     render(dc);
 }
 
+/**
+ * Draws the image in the panel
+*/
 void ImagePanel::render(wxDC &dc)
 {
     checkPosition();
     dc.DrawBitmap(displayImage, drawXPos, drawYPos, false);
 }
 
+/**
+ * Loads an image, centers it in the panel and scales it to match the user's current zooming
+*/
 void ImagePanel::loadImage(wxString file, wxBitmapType format)
 {
     baseImage.LoadFile(file, format); // image file should be checked by the calling function
@@ -78,6 +91,12 @@ void ImagePanel::zoomOut()
     }
 }
 
+/**
+ * MouseEvent handler
+ * CTRL + MouseWheel = zoom in/out
+ * SHIFT + MouseWheel = moves the image left/right
+ * MouseWheel = moves the image up/down
+*/
 void ImagePanel::OnMouseWheelEvent(wxMouseEvent &event)
 {
     int rotation;
@@ -96,6 +115,9 @@ void ImagePanel::OnMouseWheelEvent(wxMouseEvent &event)
     Refresh();
 }
 
+/**
+ * Puts the image drawing anchor in the middle of the panel
+*/
 void ImagePanel::centerImage()
 {
     if (imageExists)
@@ -103,11 +125,14 @@ void ImagePanel::centerImage()
         int imageWidth = displayImage.GetWidth();
         wxSize imagePanelSize = GetSize();
         int imagePanelWidth = imagePanelSize.GetWidth();
-        drawXPos = std::max((imagePanelWidth - imageWidth) / 2, 0);
+        drawXPos = std::max((imagePanelWidth - static_cast<int>(imageWidth * scale)) / 2, 0);
     }
     Refresh();
 }
 
+/**
+ * Resizes the display image for zooming
+*/
 void ImagePanel::rescale()
 {
     wxImage toScaleImage = baseImage.ConvertToImage();
@@ -119,11 +144,14 @@ void ImagePanel::rescale()
     Refresh();
 }
 
+/**
+ * Resizes the window and the panel so the image displayed image fits entirerly in
+*/
 void ImagePanel::makeImageFitPanel()
 {
     int width, height;
-    width = std::max(GetParent()->GetSize().GetWidth(), baseImage.GetWidth());
-    height = GetParent()->GetSize().GetHeight() - GetSize().GetHeight() + baseImage.GetHeight();
+    width = std::max(GetParent()->GetSize().GetWidth(), displayImage.GetWidth());
+    height = GetParent()->GetSize().GetHeight() - GetSize().GetHeight() + displayImage.GetHeight();
     GetParent()->SetSize(wxSize(width, height));
 }
 
