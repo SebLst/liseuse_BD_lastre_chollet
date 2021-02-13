@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.0)
 project(CBReader)
 
-set( MAKE_CXX_FLAGS "wx-config --cxxflags --libs -Wall" )
+set(MAKE_CXX_FLAGS "wx-config --cxxflags --libs -Wall")
 
 ##############
 ## EXTERNAL ##
@@ -26,5 +26,4 @@ target_link_libraries(cbreader wx::core wx::base)
 target_include_directories(cbreader
   SYSTEM PUBLIC
   external/wxWidgets/include
-  external/libarchive/include
 )
