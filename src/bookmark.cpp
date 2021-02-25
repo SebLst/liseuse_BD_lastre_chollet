@@ -5,6 +5,10 @@
 BEGIN_EVENT_TABLE(BookmarkPanel, wxPanel)
 END_EVENT_TABLE()
 
+/**
+ * Bookmarks constructor
+ * @param parent wxFrame parent
+*/
 BookmarkPanel::BookmarkPanel(wxFrame *parent)
     : wxPanel(parent)
 {

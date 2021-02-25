@@ -15,6 +15,13 @@ namespace window
         OPEN_DIRECTORY,
         HIDE_BOOKMARK_PANEL
     };
+
+    enum modes
+    {
+        NONE,
+        FILE,
+        BOOK
+    };
 }
 
 #endif

@@ -7,6 +7,11 @@
 #include <wx/wx.h>
 #endif
 
+#include "id.h"
+
+/**
+ * Panel used to display images
+*/
 class ImagePanel : public wxPanel
 {
 private:
@@ -16,10 +21,29 @@ private:
     int drawXPos = 0;         // x position of the image anchor
     int drawYPos = 0;         // y position of the image anchor
     double scale = 1;         // scale of the image
+    window::modes currentMode = window::modes::NONE;
 
 public:
     ImagePanel(wxFrame *parent);
     ~ImagePanel();
+
+    /**
+     * Sets the current mode
+     * @param mode NONE, FILE or BOOK
+    */
+    void setMode(window::modes mode)
+    {
+        currentMode = mode;
+    }
+
+    /**
+     * Gets the current mode
+     * @return Current mode (NONE, FILE or BOOK)
+    */
+    window::modes getMode()
+    {
+        return currentMode;
+    }
 
     void paintEvent(wxPaintEvent &evt);
     void paintNow();

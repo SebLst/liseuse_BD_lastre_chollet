@@ -22,6 +22,7 @@ EVT_MENU(window::id::PREVIOUS_PAGE, MainWindow::OnArrowLeft)
 EVT_MENU(window::id::NEXT_PAGE, MainWindow::OnArrowRight)
 EVT_MENU(window::id::FIRST_PAGE, MainWindow::OnFirstPage)
 EVT_MENU(window::id::LAST_PAGE, MainWindow::OnLastPage)
+EVT_MENU(window::id::HIDE_BOOKMARK_PANEL, MainWindow::OnShowBookmarks)
 EVT_IDLE(MainWindow::OnIdle)
 END_EVENT_TABLE()
 
@@ -65,14 +66,18 @@ MainWindow::MainWindow(wxWindow *parent,
     // bookmark panel
     bookmarkPanel = new BookmarkPanel(this);
     sizer->Add(bookmarkPanel, 1, wxEXPAND);
+    bookmarkPanel->Hide(); // hidden by default
 
     // main display
     imagePanel = new ImagePanel(this);
     sizer->Add(imagePanel, 1, wxEXPAND);
 
     // status bar
-    CreateStatusBar();
+    int STATUS_BAR_SIZE = 2;
+    CreateStatusBar(STATUS_BAR_SIZE);
     SetStatusText(_("Welcome to CBReader!"));
+    SetStatusText(_("Open a file or document to read!"), 1);
+    statusBar = GetStatusBar();
 
     SetSizer(sizer);
 
@@ -109,6 +114,8 @@ void MainWindow::OnOpenFile(wxCommandEvent &WXUNUSED(event))
     imagePanel->resetScale();
     imagePanel->loadImage(filePath, wxBITMAP_TYPE_ANY);
     imagePanel->makeImageFitPanel();
+    imagePanel->setMode(window::modes::FILE);
+    SetStatusText(openFileDialog.GetFilename(), 1);
     Refresh();
 }
 
@@ -152,6 +159,8 @@ void MainWindow::OnOpenDir(wxCommandEvent &WXUNUSED(event))
     imagePanel->resetScale();
     imagePanel->loadImage(files[0], wxBITMAP_TYPE_ANY);
     imagePanel->makeImageFitPanel();
+    imagePanel->setMode(window::modes::BOOK);
+    SetStatusText(_("Page 1 / " + std::to_string(pageTotal)), 1);
     Refresh();
 }
 
@@ -187,6 +196,7 @@ void MainWindow::OnArrowLeft(wxCommandEvent &WXUNUSED(event))
     {
         pageCurrent--;
         imagePanel->loadImage(files[pageCurrent], wxBITMAP_TYPE_ANY);
+        SetStatusText(_("Page " + std::to_string(pageCurrent + 1) + " / " + std::to_string(pageTotal)), 1);
         Refresh();
     }
 }
@@ -205,6 +215,7 @@ void MainWindow::OnArrowRight(wxCommandEvent &WXUNUSED(event))
     {
         pageCurrent++;
         imagePanel->loadImage(files[pageCurrent], wxBITMAP_TYPE_ANY);
+        SetStatusText(_("Page " + std::to_string(pageCurrent + 1) + " / " + std::to_string(pageTotal)), 1);
         Refresh();
     }
 }
@@ -221,6 +232,7 @@ void MainWindow::OnFirstPage(wxCommandEvent &WXUNUSED(event))
 
     pageCurrent = 0;
     imagePanel->loadImage(files[pageCurrent], wxBITMAP_TYPE_ANY);
+    SetStatusText(_("Page " + std::to_string(pageCurrent + 1) + " / " + std::to_string(pageTotal)), 1);
     Refresh();
 }
 
@@ -236,6 +248,7 @@ void MainWindow::OnLastPage(wxCommandEvent &WXUNUSED(event))
 
     pageCurrent = pageTotal - 1;
     imagePanel->loadImage(files[pageCurrent], wxBITMAP_TYPE_ANY);
+    SetStatusText(_("Page " + std::to_string(pageCurrent + 1) + " / " + std::to_string(pageTotal)), 1);
     Refresh();
 }
 
@@ -278,6 +291,22 @@ void OnClose(wxCloseEvent &event)
         }
     }
     event.Skip(); // the event wiil be handled by the default event handler of wxWidgets (destroys the window)
+}
+
+/**
+ * Opens or collapses the bookmarks panel
+*/
+void MainWindow::OnShowBookmarks(wxCommandEvent &WXUNUSED(event))
+{
+    if (bookmarkPanel->IsShown())
+    {
+        bookmarkPanel->Hide();
+    }
+    else
+    {
+        bookmarkPanel->Show();
+    }
+    SendSizeEvent(); // trick to update the window (a size event refreshes the entire window)
 }
 
 MainWindow::~MainWindow()

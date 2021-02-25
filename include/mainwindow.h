@@ -73,6 +73,7 @@ public:
     void OnArrowRight(wxCommandEvent &event);
     void OnFirstPage(wxCommandEvent &event);
     void OnLastPage(wxCommandEvent &event);
+    void OnShowBookmarks(wxCommandEvent &event);
 
     void OnIdle(wxIdleEvent &event);
 
@@ -81,6 +82,7 @@ public:
     wxArrayString files;          // an array of wxString containing the list of paths to the files of the comic book
     wxString cwd = wxGetCwd();    // current working directory path
     wxDir *dir;                   // current working directory
+    wxStatusBar *statusBar;       // The status bar, displays information
 
     DECLARE_EVENT_TABLE();
 };
