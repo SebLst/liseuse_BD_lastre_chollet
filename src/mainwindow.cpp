@@ -88,6 +88,10 @@ MainWindow::MainWindow(wxWindow *parent,
     SetMinSize(wxSize(param::WINDOW_MIN_SIZE_X, param::WINDOW_MIN_SIZE_Y));
     wxIcon *appIcon = new wxIcon(cbreader_icon); // image from https://www.freepik.com
     SetIcon(*appIcon);
+
+    // TEST
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    imagePanel->loadZipImage(2);
 }
 
 /**
@@ -159,7 +163,7 @@ void MainWindow::OnOpenDir(wxCommandEvent &WXUNUSED(event))
     imagePanel->resetScale();
     imagePanel->loadImage(files[0], wxBITMAP_TYPE_ANY);
     imagePanel->makeImageFitPanel();
-    imagePanel->setMode(window::modes::BOOK);
+    imagePanel->setMode(window::modes::FOLDER);
     SetStatusText(_("Page 1 / " + std::to_string(pageTotal)), 1);
     Refresh();
 }

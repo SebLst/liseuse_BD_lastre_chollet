@@ -59,6 +59,18 @@ void ImagePanel::loadImage(wxString file, wxBitmapType format)
 }
 
 /**
+ * Loads an image, used when opening cbz files
+*/
+void ImagePanel::loadZipImage(int page)
+{
+    baseImage = zip->openPage(page); // the page number should be checked before calling the method
+    displayImage = baseImage;
+    imageExists = true;
+    centerImage();
+    rescale();
+}
+
+/**
  * Setter of scale
  * @param scale scale of the image (> 0, 1 = original size)
 */
