@@ -162,6 +162,8 @@ void MainWindow::OnOpenDir(wxCommandEvent &WXUNUSED(event))
     imagePanel->setMode(window::modes::FOLDER);
     SetStatusText(_("Page 1 / " + std::to_string(pageTotal)), 1);
     Refresh();
+
+    bookmarkPanel->setCurrentPage(pageCurrent);
 }
 
 /**
@@ -199,6 +201,8 @@ void MainWindow::OnArrowLeft(wxCommandEvent &WXUNUSED(event))
         SetStatusText(_("Page " + std::to_string(pageCurrent + 1) + " / " + std::to_string(pageTotal)), 1);
         Refresh();
     }
+
+    bookmarkPanel->setCurrentPage(pageCurrent);
 }
 
 /**
@@ -218,6 +222,8 @@ void MainWindow::OnArrowRight(wxCommandEvent &WXUNUSED(event))
         SetStatusText(_("Page " + std::to_string(pageCurrent + 1) + " / " + std::to_string(pageTotal)), 1);
         Refresh();
     }
+
+    bookmarkPanel->setCurrentPage(pageCurrent);
 }
 
 /**
@@ -234,6 +240,8 @@ void MainWindow::OnFirstPage(wxCommandEvent &WXUNUSED(event))
     imagePanel->loadImage(files[pageCurrent], wxBITMAP_TYPE_ANY);
     SetStatusText(_("Page " + std::to_string(pageCurrent + 1) + " / " + std::to_string(pageTotal)), 1);
     Refresh();
+
+    bookmarkPanel->setCurrentPage(pageCurrent);
 }
 
 /**
@@ -250,6 +258,8 @@ void MainWindow::OnLastPage(wxCommandEvent &WXUNUSED(event))
     imagePanel->loadImage(files[pageCurrent], wxBITMAP_TYPE_ANY);
     SetStatusText(_("Page " + std::to_string(pageCurrent + 1) + " / " + std::to_string(pageTotal)), 1);
     Refresh();
+
+    bookmarkPanel->setCurrentPage(pageCurrent);
 }
 
 /**

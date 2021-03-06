@@ -17,7 +17,8 @@ namespace window
         OPEN_FILE,
         OPEN_DIRECTORY,
         HIDE_BOOKMARK_PANEL,
-        NEW_BOOKMARK
+        NEW_BOOKMARK,
+        DELETE_BOOKMARK
     };
 
     /**

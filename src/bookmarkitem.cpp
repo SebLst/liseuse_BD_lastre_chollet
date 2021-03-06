@@ -1,15 +1,13 @@
 #include "bookmarkitem.h"
 
-BookmarkItem::BookmarkItem(wxWindow *parent,
-                           wxWindowID id,
-                           const wxString &label,
-                           const wxPoint &pos,
-                           const wxSize &size,
-                           long style,
-                           const wxValidator &validator,
-                           const wxString &name)
-    : wxButton(parent, id, label, pos, size, style, validator, name)
+BookmarkItem::BookmarkItem(wxWindow *parent, wxString bookmarkName, int page)
+    : wxBoxSizer(wxHORIZONTAL)
 {
+    this->page = page;
+    bookmarkButton = new wxButton(parent, -1, bookmarkName);
+    deleteButton = new wxButton(parent, -1, wxString::Format(wxT("Page %i"), page));
+    Add(bookmarkButton, wxALIGN_LEFT);
+    Add(deleteButton, wxALIGN_RIGHT);
 }
 
 BookmarkItem::~BookmarkItem()

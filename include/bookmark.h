@@ -15,6 +15,8 @@
 class BookmarkPanel : public wxPanel
 {
 private:
+    int currentPage = -1;
+
 public:
     BookmarkPanel(wxFrame *parent);
     ~BookmarkPanel();
@@ -23,7 +25,11 @@ public:
     wxBoxSizer *bookmarkSizer;
     wxScrolledWindow *bookmarkList;
 
+    int getCurrentPage() { return currentPage; }
+    void setCurrentPage(int currentPage) { this->currentPage = currentPage; }
+
     void addBookmark(wxCommandEvent &event);
+    void deleteBookmark(wxCommandEvent &event);
 
     DECLARE_EVENT_TABLE();
 };

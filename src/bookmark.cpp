@@ -26,7 +26,6 @@ BookmarkPanel::BookmarkPanel(wxFrame *parent)
                                                         wxDefaultPosition,
                                                         wxSize(200, 50),
                                                         wxALIGN_CENTER_HORIZONTAL);
-    bookmarkPanelTitle->SetBackgroundColour(wxColor(*wxBLACK));
     wxFont titleFont = bookmarkPanelTitle->GetFont();
     titleFont.SetPointSize(22);
     bookmarkPanelTitle->SetFont(titleFont);
@@ -52,21 +51,20 @@ BookmarkPanel::BookmarkPanel(wxFrame *parent)
 */
 void BookmarkPanel::addBookmark(wxCommandEvent &WXUNUSED(event))
 {
+    if (currentPage < 0)
+        return;
+
     wxTextEntryDialog *dialog = new wxTextEntryDialog(this, _("Name your bookmark:"));
 
     int state = dialog->ShowModal();
     if (state != wxID_OK)
-    {
         return;
-    }
 
     wxString bookmarkName = dialog->GetValue();
     if (bookmarkName == _(""))
-    {
         return;
-    }
 
-    BookmarkItem *bookmarkItem = new BookmarkItem(bookmarkList, -1, bookmarkName);
+    BookmarkItem *bookmarkItem = new BookmarkItem(bookmarkList, bookmarkName, currentPage + 1);
     bookmarkSizer->Add(bookmarkItem, 0, wxALIGN_LEFT);
     Layout();
 }

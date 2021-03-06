@@ -72,6 +72,9 @@ void ImagePanel::setScale(double scale)
 */
 void ImagePanel::zoomIn()
 {
+    if (currentMode == window::modes::NONE)
+        return;
+
     setScale(scale + param::ZOOM_STEP);
     rescale();
     Refresh();
@@ -82,6 +85,9 @@ void ImagePanel::zoomIn()
 */
 void ImagePanel::zoomOut()
 {
+    if (currentMode == window::modes::NONE)
+        return;
+
     if (scale - param::ZOOM_STEP >= param::MIN_SCALE)
     {
         setScale(scale - param::ZOOM_STEP);

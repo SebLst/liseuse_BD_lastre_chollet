@@ -7,24 +7,21 @@
 #include <wx/wx.h>
 #endif
 
+#include "bookmark.h"
+
 /**
- * Class for bookmark buttons
- * 
+ * Class for bookmark buttons.
+ * For now, its just here for displaying the bookmarks created but the buttons don't work.
  */
-class BookmarkItem : public wxButton
+class BookmarkItem : public wxBoxSizer
 {
 private:
     int page;
+    wxButton *bookmarkButton;
+    wxButton *deleteButton;
 
 public:
-    BookmarkItem(wxWindow *parent,
-                 wxWindowID id,
-                 const wxString &label = wxEmptyString,
-                 const wxPoint &pos = wxDefaultPosition,
-                 const wxSize &size = wxDefaultSize,
-                 long style = 0,
-                 const wxValidator &validator = wxDefaultValidator,
-                 const wxString &name = wxButtonNameStr);
+    BookmarkItem(wxWindow *parent, wxString bookmarkName, int page);
     ~BookmarkItem();
 
     void setPage(int page) { this->page = page; }
