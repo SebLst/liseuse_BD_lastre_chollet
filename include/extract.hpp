@@ -1,3 +1,5 @@
+/*
+
 #ifndef EXTRACT_HPP
 #define EXTRACT_HPP
 
@@ -21,4 +23,4 @@ static int extract(const char *filename, const char *destination, const int page
 
 
 #endif
-
+*/

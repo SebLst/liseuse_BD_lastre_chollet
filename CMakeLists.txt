@@ -33,7 +33,3 @@ target_link_libraries(cbreader archive)
 target_include_directories(cbreader
   SYSTEM PUBLIC
   external/libarchive/include)
-
-
-
-

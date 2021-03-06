@@ -34,3 +34,5 @@
 # Other
 build
 /.vscode
+/res/*.cbr
+/res/blackhawk

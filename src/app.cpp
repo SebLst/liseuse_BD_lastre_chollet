@@ -15,6 +15,7 @@ App::~App()
 
 /**
  * Method called when the app is executed
+ * @return Boolean indicating if the app initialization worked 
 */
 bool App::OnInit()
 {
@@ -22,18 +23,17 @@ bool App::OnInit()
     {
         return false;
     }
-	
-	
+
     wxInitAllImageHandlers(); // allows the manipulation of all supported image file extensions by wxWigets
 
-    /*MainWindow *main = new MainWindow(NULL,
+    MainWindow *main = new MainWindow(NULL,
                                       window::id::MAINWINDOW,
                                       _("Comic Book Reader"),
                                       wxDefaultPosition,
                                       wxSize(800, 600));
-    main->Show();*/
+    main->Show();
 
     return true;
 }
 
-DECLARE_APP(App); // wxGetApp()
+DECLARE_APP(App);
