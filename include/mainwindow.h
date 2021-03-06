@@ -63,9 +63,8 @@ public:
 
     void OnOpenFile(wxCommandEvent &event);
     void OnOpenDir(wxCommandEvent &event);
+    void OnOpenCBZ(wxCommandEvent &event);
     void OnHelp(wxCommandEvent &event);
-    void OnZip(wxCommandEvent &event); // TODO
-    void OnRar(wxCommandEvent &event); // TODO
     void OnQuit(wxCommandEvent &event);
     void OnZoomIn(wxCommandEvent &event);
     void OnZoomOut(wxCommandEvent &event);
