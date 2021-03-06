@@ -12,17 +12,12 @@
 #include <unistd.h>
 #include <string>
 #include <stdio.h>
+#include <wx/arrstr.h>
+#include <wx/wfstream.h>
+#include <wx/zipstrm.h>
+#include <wx/filename.h>
+#include <wx/image.h>
 
-
-/*
-inline void tri_iteratif(const char *tableau[], int size);
-
-static int copy_data(struct archive *ar, struct archive *aw);
-
-static int extract(const char *filename, const char *destination, const int page);
-
-static int extractNumberPages(const char *filename);
-*/
 
 class CBArchive
 {
@@ -35,10 +30,16 @@ public:
 
     int extractNumberPages();
 
-    int extract(const char *destination, int page);
+    int extract(const char *destination, int page, wxString *pathPage);
+
+    wxArrayString extractAll(const char* destination);
+
+    int extractPages(wxString archiveName, int* pages, int size);
 
 };
 
+
+void createCbz(wxArrayString images, wxString archiveName);
 
 
 #endif
