@@ -16,7 +16,9 @@ namespace window
         LAST_PAGE,
         OPEN_FILE,
         OPEN_DIRECTORY,
-        HIDE_BOOKMARK_PANEL
+        HIDE_BOOKMARK_PANEL,
+        NEW_BOOKMARK,
+        DELETE_BOOKMARK
     };
 
     /**
