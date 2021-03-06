@@ -1,5 +1,3 @@
-/*
-
 #ifndef EXTRACT_HPP
 #define EXTRACT_HPP
 
@@ -20,7 +18,4 @@ static int copy_data(struct archive *ar, struct archive *aw);
 
 static int extract(const char *filename, const char *destination, const int page);
 
-
-
 #endif
-*/
