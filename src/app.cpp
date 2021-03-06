@@ -1,7 +1,7 @@
 #include "app.h"
 #include "mainwindow.h"
 #include "id.h"
-#include "extract.cpp"
+#include "cbarchive.h"
 
 IMPLEMENT_APP(App); // Main
 
@@ -25,6 +25,10 @@ bool App::OnInit()
     }
 
     wxInitAllImageHandlers(); // allows the manipulation of all supported image file extensions by wxWigets
+
+    CBArchive *arch = new CBArchive("../../cb.cbz");
+    arch->extract("../../fichier/", 16);
+
 
     MainWindow *main = new MainWindow(NULL,
                                       window::id::MAINWINDOW,
