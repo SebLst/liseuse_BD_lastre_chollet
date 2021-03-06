@@ -88,9 +88,6 @@ MainWindow::MainWindow(wxWindow *parent,
     SetMinSize(wxSize(param::WINDOW_MIN_SIZE_X, param::WINDOW_MIN_SIZE_Y));
     wxIcon *appIcon = new wxIcon(cbreader_icon); // image from https://www.freepik.com
     SetIcon(*appIcon);
-
-    // TEST
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 /**

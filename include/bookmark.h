@@ -7,6 +7,8 @@
 #include <wx/wx.h>
 #endif
 
+#include "bookmarkitem.h"
+
 /**
  * Panel used for bookmarks
 */
@@ -16,6 +18,12 @@ private:
 public:
     BookmarkPanel(wxFrame *parent);
     ~BookmarkPanel();
+
+    wxBoxSizer *sizer;
+    wxBoxSizer *bookmarkSizer;
+    wxScrolledWindow *bookmarkList;
+
+    void addBookmark(wxCommandEvent &event);
 
     DECLARE_EVENT_TABLE();
 };

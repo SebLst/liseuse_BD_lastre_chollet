@@ -24,8 +24,7 @@ bool App::OnInit()
         return false;
     }
 
-    wxInitAllImageHandlers(); // allows the manipulation of all supported image file extensions by wxWigets
-
+    wxInitAllImageHandlers(); // allows the manipulation of all supported image file extensions by wxWidgets
 
     MainWindow *main = new MainWindow(NULL,
                                       window::id::MAINWINDOW,
