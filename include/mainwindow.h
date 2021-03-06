@@ -63,7 +63,7 @@ public:
 
     void OnOpenFile(wxCommandEvent &event);
     void OnOpenDir(wxCommandEvent &event);
-    void OnOpenCBZ(wxCommandEvent &event);
+    void OnOpenArchive(wxCommandEvent &event);
     void OnHelp(wxCommandEvent &event);
     void OnQuit(wxCommandEvent &event);
     void OnZoomIn(wxCommandEvent &event);

@@ -16,7 +16,7 @@
 BEGIN_EVENT_TABLE(MainWindow, wxFrame)
 EVT_MENU(window::id::OPEN_FILE, MainWindow::OnOpenFile)
 EVT_MENU(window::id::OPEN_DIRECTORY, MainWindow::OnOpenDir)
-EVT_MENU(window::id::OPEN_ARCHIVE, MainWindow::OnOpenCBZ) // for now the only archive format supported is zip
+EVT_MENU(window::id::OPEN_ARCHIVE, MainWindow::OnOpenArchive)
 EVT_MENU(wxID_HELP, MainWindow::OnHelp)
 EVT_MENU(wxID_EXIT, MainWindow::OnQuit)
 EVT_MENU(wxID_ZOOM_IN, MainWindow::OnZoomIn)
@@ -172,7 +172,7 @@ void MainWindow::OnOpenDir(wxCommandEvent &WXUNUSED(event))
 /**
  * Opens a file dialog to open a cbz file 
 */
-void MainWindow::OnOpenCBZ(wxCommandEvent &WXUNUSED(event))
+void MainWindow::OnOpenArchive(wxCommandEvent &WXUNUSED(event))
 {
     wxFileDialog openFileDialog(this, _("Open CBZ or CBR file"), "", "",
                                 "CBZ or CBR files (*.cbz;*.cbr)|*.cbz;*cbr",
