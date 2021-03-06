@@ -26,16 +26,6 @@ bool App::OnInit()
 
     wxInitAllImageHandlers(); // allows the manipulation of all supported image file extensions by wxWigets
 
-    CBArchive *arch = new CBArchive("../../cb.cbz");
-    
-    //wxArrayString liste = arch->extractAll("../../fichierTest/");
-
-
-    wxString wxName("../../allez.cbz");
-    int pages[10];
-    for (int i=1; i<11; i++) pages[i-1] = i;
-    arch->extractPages(wxName, pages, 10);
-
 
     MainWindow *main = new MainWindow(NULL,
                                       window::id::MAINWINDOW,
