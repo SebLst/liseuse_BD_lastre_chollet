@@ -26,8 +26,7 @@ namespace window
     {
         NONE,
         FILE,
-        FOLDER,
-        ZIP
+        FOLDER
     };
 }
 

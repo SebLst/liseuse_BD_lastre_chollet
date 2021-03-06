@@ -19,14 +19,7 @@ sudo apt-get install build-essential libgtk-3-dev
 
 After cloning the repo, don't forget to run the following to get the external dependencies.
 ```
-git submodule init
-git submodule update
-cd external/wxWidgets
-git submodule init
-git submodule update
-cd ../libarchive
-git submodule init
-git submodule update
+git submodule update --init --recursive
 ``` 
 
 ```
