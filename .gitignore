@@ -36,3 +36,4 @@ build
 /.vscode
 /res/*.cbr
 /res/blackhawk
+/res/extracted

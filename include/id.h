@@ -16,6 +16,7 @@ namespace window
         LAST_PAGE,
         OPEN_FILE,
         OPEN_DIRECTORY,
+        OPEN_ARCHIVE,
         HIDE_BOOKMARK_PANEL,
         NEW_BOOKMARK,
         DELETE_BOOKMARK

@@ -18,29 +18,23 @@
 #include <wx/filename.h>
 #include <wx/image.h>
 
-
 class CBArchive
 {
 private:
     const char *filename;
 
 public:
-    CBArchive(const char *aFilename): filename(aFilename) {}
+    CBArchive(const char *aFilename) : filename(aFilename) {}
     ~CBArchive() {}
 
     int extractNumberPages();
-
     int extract(const char *destination, int page, wxString *pathPage);
+    wxArrayString extractAll(const char *destination);
+    int extractPages(wxString archiveName, int *pages, int size, const char *destination);
 
-    wxArrayString extractAll(const char* destination);
+    const char *getFilename() { return filename; }
 
-    int extractPages(wxString archiveName, int* pages, int size);
-
+    void static createCbz(wxArrayString images, wxString archiveName);
 };
 
-
-void createCbz(wxArrayString images, wxString archiveName);
-
-
 #endif
-
