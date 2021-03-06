@@ -23,6 +23,9 @@ git submodule update
 cd external/wxWidgets
 git submodule init
 git submodule update
+cd ../libarchive
+git submodule init
+git submodule update
 ``` 
 
 ```

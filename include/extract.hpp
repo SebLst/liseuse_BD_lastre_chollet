@@ -1,13 +1,24 @@
 #ifndef EXTRACT_HPP
 #define EXTRACT_HPP
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <archive.h>
+#include <archive_entry.h>
+#include <fcntl.h>
+#include <iostream>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 #include <string>
 
+inline void tri_iteratif(const char *tableau[], int size);
 
-// This function unzip a full document (filename) from the place source_path and put it in the place directory_path
-void extract_zip(std::string source_path, std::string filename, std::string directory_path="NULL");
+static int copy_data(struct archive *ar, struct archive *aw);
 
-// This function extract the names of the files from a zip archive (filename) placed at source_path and put them in a file 
-//void extract_file_names_zip(std::string source_path, std::string filename, std::string directory_file);
+static int extract(const char *filename, const char *destination, const int page);
+
 
 
 #endif
+
