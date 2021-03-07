@@ -374,7 +374,7 @@ void MainWindow::OnShowBookmarks(wxCommandEvent &WXUNUSED(event))
 /**
  * Opens a file dialog to select an entry archive, then asks the user to enter the pages he wants to export in a new CBZ file.
 */
-void MainWindow::OnExportCbz(wxCommandEvent &WXUNUSED(&event))
+void MainWindow::OnExportCbz(wxCommandEvent &WXUNUSED(event))
 {
     if (!imagePanel->getMode() == window::modes::FOLDER)
         return;
