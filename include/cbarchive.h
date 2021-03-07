@@ -30,7 +30,6 @@ public:
     int extractNumberPages();
     int extract(const char *destination, int page, wxString *pathPage);
     wxArrayString extractAll(const char *destination);
-    int extractPages(wxString archiveName, int *pages, int size, const char *destination);
 
     const char *getFilename() { return filename; }
 

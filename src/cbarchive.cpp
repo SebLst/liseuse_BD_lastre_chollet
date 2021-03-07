@@ -50,7 +50,6 @@ static int copy_data(struct archive *ar, struct archive *aw)
 	}
 }
 
-
 /**
  * Give the number of pages within an archive
  * @return Return the number of pages or -1 if there was an error
@@ -87,8 +86,6 @@ int CBArchive::extractNumberPages()
 	return i;
 }
 
-
-
 /**
  * Extract a single page from an archive
  * @param destination Destination folder
@@ -104,10 +101,11 @@ int CBArchive::extract(const char *destination, int page, wxString *pathPage)
 	struct archive_entry *entry;
 	int flags;
 	int r;
-	
+
 	// Verify that we can exctract those pages
 	int nPages = this->extractNumberPages();
-	if (page <1 || page > nPages) return 1;
+	if (page < 1 || page > nPages)
+		return 1;
 
 	// Select which attributes we want to restore.
 	flags = ARCHIVE_EXTRACT_TIME;
@@ -205,7 +203,6 @@ int CBArchive::extract(const char *destination, int page, wxString *pathPage)
 	return 0;
 }
 
-
 /**
  * Extract all pages from an archive
  * @param destination Destination folder
@@ -255,26 +252,4 @@ void CBArchive::createCbz(wxArrayString images, wxString archiveName)
 		zip.PutNextEntry(temp);
 		image.SaveFile(zip, wxBITMAP_TYPE_JPEG); // ideally, we would ask the image format to the user
 	}
-}
-
-/**
- * Extract images from a cbz as a new cbz archive
- * @param archiveName Path and name of the new archive
- * @param pages List of the pages to extract
- * @param size Size of the list pages
- * @param destination Destination directory path
- * @return Return 1 if something went wrong
-*/
-int CBArchive::extractPages(wxString archiveName, int *pages, int size, const char *destination)
-{
-	wxArrayString images;
-	wxString path;
-	for (int i = 0; i < size; i++)
-	{
-		if (this->extract(destination, pages[i], &path))
-			return 1;
-		images.Add(path);
-	}
-	createCbz(images, archiveName);
-	return 0;
 }

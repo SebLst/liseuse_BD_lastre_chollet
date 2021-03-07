@@ -31,8 +31,6 @@ EVT_MENU(window::id::EXPORT_CBZ, MainWindow::OnExportCbz)
 EVT_IDLE(MainWindow::OnIdle)
 END_EVENT_TABLE()
 
-
-
 void OnClose(wxCloseEvent &event);
 
 /**
@@ -373,79 +371,75 @@ void MainWindow::OnShowBookmarks(wxCommandEvent &WXUNUSED(event))
     SendSizeEvent(); // trick to update the window (a size event refreshes the entire window)
 }
 
-void MainWindow::OnExportCbz (wxCommandEvent &WXUNUSED(&event))
+/**
+ * Opens a file dialog to select an entry archive, then asks the user to enter the pages he wants to export in a new CBZ file.
+*/
+void MainWindow::OnExportCbz(wxCommandEvent &WXUNUSED(&event))
 {
-    wxFileDialog openFileDialog(this, _("Choose input CBZ or CBR file"), "", "",
-                                "CBZ or CBR files (*.cbz;*.cbr)|*.cbz;*cbr",
-                                wxFD_OPEN | wxFD_FILE_MUST_EXIST);
-
-    if (openFileDialog.ShowModal() == wxID_CANCEL)
-        return; // the user changed his mind
-
-    // proceed loading the file chosen by the user
-    wxString filePath = openFileDialog.GetPath();
-    wxFileInputStream input_stream(filePath);
-    if (!input_stream.IsOk())
-    {
-        wxLogError("Cannot open file '%s'.", openFileDialog.GetPath());
+    if (!imagePanel->getMode() == window::modes::FOLDER)
         return;
-    }
 
-    CBArchive cbz(filePath);
-
-    wxDirDialog openDirDialog(this, "Choose output folder", "",
-                                wxDD_DEFAULT_STYLE| wxDD_DIR_MUST_EXIST);
+    wxDirDialog openDirDialog(this, _("Choose export directory"), cwd,
+                              wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
 
     if (openDirDialog.ShowModal() == wxID_CANCEL)
         return; // the user changed his mind
-    
+
     wxString destination = openDirDialog.GetPath();
     wxString pagesStr = wxGetTextFromUser("Enter the pages to extract as \"1,2,5,15,23\"");
-    
-    int i=0;
+    wxArrayString filesToExtract;
+
+    // Conversion of the user entry to a wxArrayString of file paths
+    int i = 0;
     std::string page = "";
-    int nombrePages = 0;
-    int maxPages = cbz.extractNumberPages();
-    int pages[maxPages];
     int p;
-    while(pagesStr[i] != '\0')
+    while (pagesStr[i] != '\0')
     {
         if (pagesStr[i] == ',')
         {
             std::stringstream ss(page.c_str());
-            if (!(ss>>p))
+            if (!(ss >> p))
             {
-                wxLogError("Incorrect format for the pages to extract");
+                wxLogError("Incorrect format for the pages to extract", _("Select pages"));
                 return;
             }
-            pages[nombrePages] =p;
+
+            if (p < 1 || p > pageTotal)
+            {
+                wxLogError("Incorrect page number");
+                return;
+            }
+
+            filesToExtract.Add(files[p - 1]);
             page = "";
-            nombrePages++;
             i++;
         }
-        else 
+        else
         {
             page += pagesStr[i];
             i++;
         }
     }
     std::stringstream ss(page);
-    if (!(ss>>p))
+    if (!(ss >> p))
     {
         wxLogError("Incorrect format for the pages to extract");
         return;
     }
-    pages[nombrePages] =p;
-    nombrePages++;
+    filesToExtract.Add(files[p - 1]);
 
-    const char *archivePath = destination.Append(_("/")).Append("archive.cbz");
-    if (cbz.extractPages(archivePath, pages, nombrePages,destination)) 
+    // get archive name from user
+    wxString archiveName = wxGetTextFromUser("Give your archive a name:", _("Name archive"));
+    if (archiveName == _(""))
     {
-        wxLogError("Cannot extract the given pages");
+        wxLogError("Incorrect archive name");
         return;
     }
-}
 
+    destination.Append("/").Append(archiveName).Append(".cbz");
+    std::cout << destination << std::endl;
+    CBArchive::createCbz(filesToExtract, destination);
+}
 
 MainWindow::~MainWindow()
 {
