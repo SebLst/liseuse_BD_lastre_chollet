@@ -24,17 +24,17 @@ void makeMenuBar(wxMenuBar *menuBar)
     openFolderItem->SetBitmap(wxArtProvider::GetBitmap(wxART_FOLDER_OPEN));
     fileMenu->Append(openFolderItem);
 
-    // open CBZ item
-    wxMenuItem *openCBZItem = new wxMenuItem(fileMenu,
+    // open Archive item
+    wxMenuItem *openArchiveItem = new wxMenuItem(fileMenu,
                                              window::id::OPEN_ARCHIVE,
                                              _("Open archive\tCTRL+R"),
                                              _("Open a CBZ or CBR archive"));
-    fileMenu->Append(openCBZItem);
+    fileMenu->Append(openArchiveItem);
 
     // sous menu "Exporter..."
     wxMenu *exportMenu = new wxMenu();
     // zip menu item
-    wxMenuItem *zipItem = exportMenu->Append(wxID_ANY,
+    wxMenuItem *zipItem = exportMenu->Append(window::id::EXPORT_CBZ,
                                              _("&ZIP"),
                                              _("Export as a .cbz file"));
     // rar menu item

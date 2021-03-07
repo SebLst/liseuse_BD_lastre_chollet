@@ -3,6 +3,7 @@
 #include "id.h"
 #include "cbarchive.h"
 
+
 IMPLEMENT_APP(App); // Main
 
 App::App()
@@ -25,6 +26,7 @@ bool App::OnInit()
     }
 
     wxInitAllImageHandlers(); // allows the manipulation of all supported image file extensions by wxWidgets
+
 
     MainWindow *main = new MainWindow(NULL,
                                       window::id::MAINWINDOW,
