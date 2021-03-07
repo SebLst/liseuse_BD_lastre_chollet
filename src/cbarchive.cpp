@@ -50,6 +50,45 @@ static int copy_data(struct archive *ar, struct archive *aw)
 	}
 }
 
+
+/**
+ * Give the number of pages within an archive
+ * @return Return the number of pages or -1 if there was an error
+*/
+int CBArchive::extractNumberPages()
+{
+	struct archive *a;
+	struct archive_entry *entry;
+	int r;
+
+	a = archive_read_new();
+	archive_read_support_format_all(a);
+
+	if ((r = archive_read_open_filename(a, filename, 10240)))
+		return -1;
+
+	// Read the archive while we have not found the last page
+	int i = 0;
+	for (;; i++)
+	{
+		r = archive_read_next_header(a, &entry);
+		if (r == ARCHIVE_EOF)
+			break;
+		if (r < ARCHIVE_OK)
+			fprintf(stderr, "%s\n", archive_error_string(a));
+		if (r < ARCHIVE_WARN)
+			return -1;
+	}
+
+	// close everything
+	archive_read_close(a);
+	archive_read_free(a);
+
+	return i;
+}
+
+
+
 /**
  * Extract a single page from an archive
  * @param destination Destination folder
@@ -65,6 +104,10 @@ int CBArchive::extract(const char *destination, int page, wxString *pathPage)
 	struct archive_entry *entry;
 	int flags;
 	int r;
+	
+	// Verify that we can exctract those pages
+	int nPages = this->extractNumberPages();
+	if (page <1 || page > nPages) return 1;
 
 	// Select which attributes we want to restore.
 	flags = ARCHIVE_EXTRACT_TIME;
@@ -162,41 +205,6 @@ int CBArchive::extract(const char *destination, int page, wxString *pathPage)
 	return 0;
 }
 
-/**
- * Give the number of pages within an archive
- * @return Return the number of pages or -1 if there was an error
-*/
-int CBArchive::extractNumberPages()
-{
-	struct archive *a;
-	struct archive_entry *entry;
-	int r;
-
-	a = archive_read_new();
-	archive_read_support_format_all(a);
-
-	if ((r = archive_read_open_filename(a, filename, 10240)))
-		return -1;
-
-	// Read the archive while we have not found the last page
-	int i = 0;
-	for (;; i++)
-	{
-		r = archive_read_next_header(a, &entry);
-		if (r == ARCHIVE_EOF)
-			break;
-		if (r < ARCHIVE_OK)
-			fprintf(stderr, "%s\n", archive_error_string(a));
-		if (r < ARCHIVE_WARN)
-			return -1;
-	}
-
-	// close everything
-	archive_read_close(a);
-	archive_read_free(a);
-
-	return i;
-}
 
 /**
  * Extract all pages from an archive

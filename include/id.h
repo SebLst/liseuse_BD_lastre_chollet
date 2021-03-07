@@ -19,7 +19,8 @@ namespace window
         OPEN_ARCHIVE,
         HIDE_BOOKMARK_PANEL,
         NEW_BOOKMARK,
-        DELETE_BOOKMARK
+        DELETE_BOOKMARK,
+        EXPORT_CBZ
     };
 
     /**

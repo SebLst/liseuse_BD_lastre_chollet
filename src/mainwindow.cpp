@@ -9,6 +9,7 @@
 #include <wx/filedlg.h>
 #include <wx/wfstream.h>
 #include <wx/accel.h>
+#include <sstream>
 
 #include "./../res/icons/cbreader_icon.xpm"
 
@@ -16,7 +17,7 @@
 BEGIN_EVENT_TABLE(MainWindow, wxFrame)
 EVT_MENU(window::id::OPEN_FILE, MainWindow::OnOpenFile)
 EVT_MENU(window::id::OPEN_DIRECTORY, MainWindow::OnOpenDir)
-EVT_MENU(window::id::OPEN_ARCHIVE, MainWindow::OnOpenCBZ) // for now the only archive format supported is zip
+EVT_MENU(window::id::OPEN_ARCHIVE, MainWindow::OnOpenArchive)
 EVT_MENU(wxID_HELP, MainWindow::OnHelp)
 EVT_MENU(wxID_EXIT, MainWindow::OnQuit)
 EVT_MENU(wxID_ZOOM_IN, MainWindow::OnZoomIn)
@@ -26,8 +27,11 @@ EVT_MENU(window::id::NEXT_PAGE, MainWindow::OnArrowRight)
 EVT_MENU(window::id::FIRST_PAGE, MainWindow::OnFirstPage)
 EVT_MENU(window::id::LAST_PAGE, MainWindow::OnLastPage)
 EVT_MENU(window::id::HIDE_BOOKMARK_PANEL, MainWindow::OnShowBookmarks)
+EVT_MENU(window::id::EXPORT_CBZ, MainWindow::OnExportCbz)
 EVT_IDLE(MainWindow::OnIdle)
 END_EVENT_TABLE()
+
+
 
 void OnClose(wxCloseEvent &event);
 
@@ -170,9 +174,9 @@ void MainWindow::OnOpenDir(wxCommandEvent &WXUNUSED(event))
 }
 
 /**
- * Opens a file dialog to open a cbz file 
+ * Opens a file dialog to open an archive 
 */
-void MainWindow::OnOpenCBZ(wxCommandEvent &WXUNUSED(event))
+void MainWindow::OnOpenArchive(wxCommandEvent &WXUNUSED(event))
 {
     wxFileDialog openFileDialog(this, _("Open CBZ or CBR file"), "", "",
                                 "CBZ or CBR files (*.cbz;*.cbr)|*.cbz;*cbr",
@@ -350,7 +354,7 @@ void OnClose(wxCloseEvent &event)
             return;
         }
     }
-    event.Skip(); // the event wiil be handled by the default event handler of wxWidgets (destroys the window)
+    event.Skip(); // the event will be handled by the default event handler of wxWidgets (destroys the window)
 }
 
 /**
@@ -368,6 +372,80 @@ void MainWindow::OnShowBookmarks(wxCommandEvent &WXUNUSED(event))
     }
     SendSizeEvent(); // trick to update the window (a size event refreshes the entire window)
 }
+
+void MainWindow::OnExportCbz (wxCommandEvent &WXUNUSED(&event))
+{
+    wxFileDialog openFileDialog(this, _("Choose input CBZ or CBR file"), "", "",
+                                "CBZ or CBR files (*.cbz;*.cbr)|*.cbz;*cbr",
+                                wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+
+    if (openFileDialog.ShowModal() == wxID_CANCEL)
+        return; // the user changed his mind
+
+    // proceed loading the file chosen by the user
+    wxString filePath = openFileDialog.GetPath();
+    wxFileInputStream input_stream(filePath);
+    if (!input_stream.IsOk())
+    {
+        wxLogError("Cannot open file '%s'.", openFileDialog.GetPath());
+        return;
+    }
+
+    CBArchive cbz(filePath);
+
+    wxDirDialog openDirDialog(this, "Choose output folder", "",
+                                wxDD_DEFAULT_STYLE| wxDD_DIR_MUST_EXIST);
+
+    if (openDirDialog.ShowModal() == wxID_CANCEL)
+        return; // the user changed his mind
+    
+    wxString destination = openDirDialog.GetPath();
+    wxString pagesStr = wxGetTextFromUser("Enter the pages to extract as \"1,2,5,15,23\"");
+    
+    int i=0;
+    std::string page = "";
+    int nombrePages = 0;
+    int maxPages = cbz.extractNumberPages();
+    int pages[maxPages];
+    int p;
+    while(pagesStr[i] != '\0')
+    {
+        if (pagesStr[i] == ',')
+        {
+            std::stringstream ss(page.c_str());
+            if (!(ss>>p))
+            {
+                wxLogError("Incorrect format for the pages to extract");
+                return;
+            }
+            pages[nombrePages] =p;
+            page = "";
+            nombrePages++;
+            i++;
+        }
+        else 
+        {
+            page += pagesStr[i];
+            i++;
+        }
+    }
+    std::stringstream ss(page);
+    if (!(ss>>p))
+    {
+        wxLogError("Incorrect format for the pages to extract");
+        return;
+    }
+    pages[nombrePages] =p;
+    nombrePages++;
+
+    const char *archivePath = destination.Append(_("/")).Append("archive.cbz");
+    if (cbz.extractPages(archivePath, pages, nombrePages,destination)) 
+    {
+        wxLogError("Cannot extract the given pages");
+        return;
+    }
+}
+
 
 MainWindow::~MainWindow()
 {
